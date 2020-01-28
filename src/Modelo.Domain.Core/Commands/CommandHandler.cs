@@ -1,0 +1,35 @@
+﻿using Modelo.Domain.Core.Bus;
+using Modelo.Domain.Core.Notifications;
+using Arch.EntityFrameworkCore.UnitOfWork;
+using MediatR;
+using System.Threading.Tasks;
+
+namespace Modelo.Domain.Core.Commands
+{
+    public abstract class CommandHandler : Notifiable
+    {
+        private readonly IUnitOfWork _uow;
+
+        protected CommandHandler(IUnitOfWork uow, IMediatorHandler bus, INotificationHandler<Notification> notifications) : base(bus, notifications)
+        {
+            _uow = uow;
+        }
+
+        protected virtual async Task<CommandResponse> Commit()
+        {
+            if (!IsValid())
+            {
+                return CommandResponse.Fail;
+            }
+
+            var commandResponse = (await _uow.SaveChangesAsync()) > 0;
+
+            if (!commandResponse)
+            {
+                await Notify("Commit", "Tivemos um problema ao salvar");
+            }
+
+            return new CommandResponse(commandResponse);
+        }
+    }
+}
