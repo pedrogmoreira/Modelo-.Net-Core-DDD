@@ -1,8 +1,10 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modelo.Domain", "src\Modelo.Domain\Modelo.Domain.csproj", "{4D379CA0-38A0-46B3-B9E6-DFB850202B82}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modelo.Domain.Core", "src\Modelo.Domain.Core\Modelo.Domain.Core.csproj", "{533A38D6-61EB-46A3-9676-A2ECAFF02BA8}"
 EndProject
 Global
